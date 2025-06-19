@@ -3,8 +3,13 @@
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes(); // маршруты регистрации/входа
+
+Route::view('/home', 'home')
+    ->middleware('auth')
+    ->name('home');
 
 Route::get('/', [ListingController::class, 'index'])->name('home');
 Route::resource('listings', ListingController::class)->middleware('auth');
